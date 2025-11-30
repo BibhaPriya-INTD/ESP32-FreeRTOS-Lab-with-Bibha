@@ -43,3 +43,5 @@ void app_main(void){
         1);
 
 }
+//${workspaceFolder}/build/compile_commands.json
+//"${workspaceFolder}/**"
