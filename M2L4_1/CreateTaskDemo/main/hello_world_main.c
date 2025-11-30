@@ -28,7 +28,7 @@ void app_main(void){
     xTaskCreatePinnedToCore(
         taskFunction,
         "dynamicTask1",
-        1024,
+        10240,
         NULL,
         1,
         NULL,
@@ -36,7 +36,7 @@ void app_main(void){
     xTaskCreatePinnedToCore(
         taskFunction,
         "dynamicTask2",
-        1024,
+        10240,
         NULL,
         1,
         NULL,

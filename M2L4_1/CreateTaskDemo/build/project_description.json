@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "CreateTaskDemo",
-    "project_version":    "0b28e49",
+    "project_version":    "eec9d79-dirty",
     "project_path":       "/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_1/CreateTaskDemo",
     "idf_path":           "/home/bibha/esp/v5.5.1/esp-idf",
     "build_dir":          "/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_1/CreateTaskDemo/build",
