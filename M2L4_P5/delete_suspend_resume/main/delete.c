@@ -46,9 +46,9 @@ void TaskSusp1(void* pvParameters){
    
    for(;;){
     vTaskDelay(pdMS_TO_TICKS(500));
-    printf("From Task 1 Resuminging  Task Suspend 2\n");
+    printf("From Task 1 Resuminging  Task 2\n");
     vTaskResume(TaskSuspHandle2);
-    printf("From Task 1 Suspending  Task Suspend 1\n");
+    printf("From Task 1 Suspending  Task 1\n");
     printf("------------------------\n");
     vTaskSuspend(NULL);
 
@@ -58,9 +58,9 @@ void TaskSusp2(void* vpParameters){
    
    for(;;){
     vTaskDelay(pdMS_TO_TICKS(500));
-    printf("From Task 2 Resuminging  Task Suspend 1\n");
+    printf("From Task 2 Resuminging  Task 1\n");
     vTaskResume(TaskSuspHandle1);
-    printf("From Task 2 Suspending  Task Suspend 2\n");
+    printf("From Task 2 Suspending  Task 2\n");
     printf("------------------------\n");
     vTaskSuspend(TaskSuspHandle2);
    }
