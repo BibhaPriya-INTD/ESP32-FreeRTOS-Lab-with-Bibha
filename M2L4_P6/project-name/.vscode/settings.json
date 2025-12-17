@@ -3,7 +3,8 @@
   "idf.espIdfPath": "/home/bibha/esp/v6.0/esp-idf",
   "idf.pythonInstallPath": "/usr/bin/python3",
   "idf.openOcdConfigs": [
-    "board/esp32-wrover-kit-3.3v.cfg"
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32.cfg"
   ],
   "idf.port": "/dev/ttyUSB0",
   "idf.toolsPath": "/home/bibha/esp/.espressif",
