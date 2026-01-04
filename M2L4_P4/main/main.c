@@ -18,7 +18,7 @@ void vTaskFunction(void* pvParameters){
 
 void vTaskFunctionDelayuntil(void* pvParameters){
     char* pcParams = (char*)pvParameters;
-    const TickType_t xDelay1s = pdMS_TO_TICKS(100);
+    const TickType_t xDelay1s = pdMS_TO_TICKS(10000);
     TickType_t xLastWakeTime = xTaskGetTickCount();
     for(;;){
         vTaskDelayUntil(&xLastWakeTime, xDelay1s);
@@ -26,8 +26,33 @@ void vTaskFunctionDelayuntil(void* pvParameters){
     }
 }
 
+void vContinuousProcessingTask(void* pvParameters){
+    char* pcTaskName;
+    pcTaskName = (char* )pvParameters;
+    for(;;){
+        for(int i = 0; i<10000; i++){
+
+        }
+        printf("Continuous task %s is running\n", pcTaskName);
+    }
+}
+
+void vPeriodicTask(void* pvParameters){
+    char* pcParams = (char*)pvParameters;
+    const TickType_t xDelay1s = pdMS_TO_TICKS(10);
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+    for(;;){
+        printf("%s, Periodic task is running\n", pcParams);
+        vTaskDelayUntil(&xLastWakeTime, xDelay1s);
+    }
+}
+
 void app_main(void)
 {
-    xTaskCreatePinnedToCore(vTaskFunctionDelayuntil, "Task1", 4096, "From Task 1", 1, NULL, 1);
-    xTaskCreatePinnedToCore(vTaskFunctionDelayuntil, "Task2", 4096, "From Task 2", 1, NULL, 1);
+    //xTaskCreatePinnedToCore(vTaskFunctionDelayuntil, "Task1", 4096, "From Task 1", 1, NULL, 1);
+    //xTaskCreatePinnedToCore(vTaskFunctionDelayuntil, "Task2", 4096, "From Task 2", 1, NULL, 1);
+    xTaskCreatePinnedToCore(vContinuousProcessingTask, "Task1", 4096, "From Task 1", 1, NULL, 1);
+    xTaskCreatePinnedToCore(vContinuousProcessingTask, "Task2", 4096, "From Task 2", 1, NULL, 1);
+    xTaskCreatePinnedToCore(vPeriodicTask, "Task3", 4096, "From Task 3", 1, NULL, 1);
+    
 }
