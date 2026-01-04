@@ -53,6 +53,6 @@ void app_main(void)
     //xTaskCreatePinnedToCore(vTaskFunctionDelayuntil, "Task2", 4096, "From Task 2", 1, NULL, 1);
     xTaskCreatePinnedToCore(vContinuousProcessingTask, "Task1", 4096, "From Task 1", 1, NULL, 1);
     xTaskCreatePinnedToCore(vContinuousProcessingTask, "Task2", 4096, "From Task 2", 1, NULL, 1);
-    xTaskCreatePinnedToCore(vPeriodicTask, "Task3", 4096, "From Task 3", 1, NULL, 1);
+    xTaskCreatePinnedToCore(vPeriodicTask, "Task3", 4096, "From Task 3", 2, NULL, 1);
     
 }
