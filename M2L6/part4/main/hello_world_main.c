@@ -28,12 +28,7 @@ void app_main(void)
     BaseType_t xTimerStarted;
 
     /* Create ONE-SHOT timer */
-    xOneShotTimer = xTimerCreate(
-                        "Timer1 OneShot",
-                        pdMS_TO_TICKS(1000),
-                        pdFALSE,          // One-shot
-                        0,
-                        prvCallBack);
+    xOneShotTimer = xTimerCreate("Timer1 OneShot", pdMS_TO_TICKS(1000), pdFALSE, 0, prvCallBack);
 
     if (xOneShotTimer != NULL)
     {
