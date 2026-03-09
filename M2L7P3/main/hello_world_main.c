@@ -38,7 +38,6 @@ void sensorTask(void *pvParameters)
         xSemaphoreGive(dataReadySemaphore);
     }
 }
-
 void app_main()
 {
     dataReadySemaphore = xSemaphoreCreateBinary();
