@@ -52,6 +52,7 @@ void app_main()
     dataSem = xSemaphoreCreateBinary();
 
     xTaskCreate(producerTask, "Producer", 2048, NULL, 5, NULL);
-    xTaskCreate(evenTask, "Even Task", 2048, NULL, 5, NULL);
     xTaskCreate(oddTask, "Odd Task", 2048, NULL, 5, NULL);
+    xTaskCreate(evenTask, "Even Task", 2048, NULL, 5, NULL);
+    
 }
