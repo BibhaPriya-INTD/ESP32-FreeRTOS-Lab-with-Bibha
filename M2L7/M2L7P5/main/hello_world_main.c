@@ -18,7 +18,12 @@ void Task1(void *pvParameters)
             a++;
             ESP_LOGI(TAG, "Task1 before processing a = %d", a);
 
-            vTaskDelay(pdMS_TO_TICKS(2000));
+            
+                for (volatile long i = 0; i < 2000000; i++)
+                {
+                    // empty loop for delay
+                }
+            
 
             ESP_LOGI(TAG, "Task1 after processing a = %d", a);
 
@@ -37,7 +42,12 @@ void Task2(void *pvParameters)
             a += 10;
             ESP_LOGI(TAG, "Task2 before processing a = %d", a);
 
-            vTaskDelay(pdMS_TO_TICKS(1000));
+            
+                for (volatile long i = 0; i < 5000000; i++)
+                {
+                    // empty loop for delay
+                }
+            
 
             ESP_LOGI(TAG, "Task2 after processing a = %d", a);
 
@@ -56,7 +66,12 @@ void Task3(void *pvParameters)
         a += 5;
         ESP_LOGI(TAG, "Task3 updated a WITHOUT mutex = %d", a);
 
-        vTaskDelay(pdMS_TO_TICKS(500));
+        
+    for (volatile long i = 0; i < 500000; i++)
+    {
+        // empty loop for delay
+    }
+
     }
 }
 
