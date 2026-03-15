@@ -1,77 +1,70 @@
+#include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/semphr.h"
 #include "esp_log.h"
 
-int a = 0;
 SemaphoreHandle_t mutex;
 
-static const char *TAG = "RTOS";
+TaskHandle_t lowTaskHandle;
 
-void Task1(void *pvParameters)
+static const char *TAG = "PRIORITY_INHERIT";
+
+/* LOW PRIORITY TASK */
+void LowTask(void *pv)
 {
-    while (1)
+    ESP_LOGI(TAG, "Low: Trying to take mutex");
+
+    xSemaphoreTake(mutex, portMAX_DELAY);
+
+    ESP_LOGI(TAG, "Low: Got mutex");
+
+    for (int i = 0; i < 5; i++)
     {
-        printf("Task 1 Trying to take mutex\n");
-        if (xSemaphoreTake(mutex, portMAX_DELAY))
-        {
-            a++;
-            ESP_LOGI(TAG, "Task1 before processing a = %d", a);
+        UBaseType_t pr = uxTaskPriorityGet(NULL);
+        ESP_LOGI(TAG, "Low: working... current priority = %d", pr);
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
 
-            
-                for (volatile long i = 0; i < 2000000; i++)
-                {
-                    // empty loop for delay
-                }
-            
+    ESP_LOGI(TAG, "Low: Releasing mutex");
 
-            ESP_LOGI(TAG, "Task1 after processing a = %d", a);
+    xSemaphoreGive(mutex);
 
-            xSemaphoreGive(mutex);
-        }
+    for (;;)
+    {
+        vTaskDelay(1000);
     }
 }
 
-void Task2(void *pvParameters)
+/* MEDIUM PRIORITY TASK */
+void MediumTask(void *pv)
 {
+    vTaskDelay(pdMS_TO_TICKS(300));
+
     while (1)
     {
-        printf("Task 2 Trying to take mutex\n");
-        if (xSemaphoreTake(mutex, portMAX_DELAY))
-        {
-            a += 10;
-            ESP_LOGI(TAG, "Task2 before processing a = %d", a);
+        ESP_LOGI(TAG, "Medium: Running");
 
-            
-                for (volatile long i = 0; i < 5000000; i++)
-                {
-                    // empty loop for delay
-                }
-            
-
-            ESP_LOGI(TAG, "Task2 after processing a = %d", a);
-
-            xSemaphoreGive(mutex);
-        }
-
-
+        vTaskDelay(pdMS_TO_TICKS(400));
     }
 }
 
-void Task3(void *pvParameters)
+/* HIGH PRIORITY TASK */
+void HighTask(void *pv)
 {
-    while (1)
-    {
-        // WRONG: accessing resource without mutex
-        a += 5;
-        ESP_LOGI(TAG, "Task3 updated a WITHOUT mutex = %d", a);
+    vTaskDelay(pdMS_TO_TICKS(600));
 
-        
-    for (volatile long i = 0; i < 500000; i++)
-    {
-        // empty loop for delay
-    }
+    ESP_LOGI(TAG, "High: Trying to take mutex");
 
+    xSemaphoreTake(mutex, portMAX_DELAY);
+
+    ESP_LOGI(TAG, "High: Acquired mutex");
+
+    xSemaphoreGive(mutex);
+
+    for (;;)
+    {
+        vTaskDelay(1000);
     }
 }
 
@@ -79,9 +72,10 @@ void app_main()
 {
     mutex = xSemaphoreCreateMutex();
 
-    xTaskCreate(Task1, "Task1", 2048, NULL, 1, NULL);
-    vTaskDelay(1);
-    xTaskCreate(Task2, "Task2", 2048, NULL, 3, NULL);
-    vTaskDelay(1);
-    xTaskCreate(Task3, "Task3", 2048, NULL, 2, NULL);
+    /* Create tasks on SAME CORE (core 1) */
+    xTaskCreatePinnedToCore(LowTask, "LowTask", 2048, NULL, 1, &lowTaskHandle, 1);
+
+    xTaskCreatePinnedToCore(MediumTask, "MediumTask", 2048, NULL, 2, NULL, 1);
+
+    xTaskCreatePinnedToCore(HighTask, "HighTask", 2048, NULL, 3, NULL, 1);
 }
