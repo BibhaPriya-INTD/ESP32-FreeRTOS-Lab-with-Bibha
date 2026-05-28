@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/CMakeFiles/bootloader
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/CMakeFiles/bootloader.rule
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/CMakeFiles/bootloader-complete.rule
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/bibha/Desktop/embeddedwithbibha/workspace/M2L4_P5/delete_suspend_resume/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
