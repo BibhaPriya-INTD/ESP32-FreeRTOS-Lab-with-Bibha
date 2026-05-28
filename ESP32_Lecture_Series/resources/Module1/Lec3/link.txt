@@ -1,0 +1,10 @@
+(09:21:40 PM) bibha:
+VS CODE ->
+Install Visual studio code
+https://code.visualstudio.com/
+
+Install prerequisit
+https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html
+
+ESP_IDF
+https://github.com/espressif/vscode-esp-idf-extension/blob/master/README.md
